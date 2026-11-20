@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="application-name" content="Controle IMEI">
+  <meta name="author" content="CARLOS FRANÇA">
+  <title>Controle IMEI • Desenvolvido por CARLOS FRANÇA</title>
+  <style>
+    :root{--navy:#0d172a;--navy2:#14233b;--mint:#12b981;--mint-soft:#dbf9ed;--bg:#f5f7fa;--white:#fff;--ink:#18243b;--muted:#6e7b8d;--line:#e5eaf0;--bad:#c73242;--warn:#a76100;--shadow:0 8px 26px rgba(18,33,56,.045)}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}body{display:flex}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}input,select{background:white;color:var(--ink)}.sidebar{width:242px;background:var(--navy);min-height:100vh;padding:28px 16px;position:fixed;inset:0 auto 0 0;display:flex;flex-direction:column;z-index:3}.brand{display:flex;gap:12px;align-items:center;color:white;padding:2px 10px 35px}.brand-icon{width:43px;height:43px;background:var(--mint);color:#052f22;border-radius:13px;display:grid;place-items:center;font-size:23px;font-weight:900}.brand-title{font-size:16px;font-weight:780;letter-spacing:-.4px}.brand-sub{font-size:11px;color:#9babc1;margin-top:3px;letter-spacing:.35px}.nav{display:flex;flex-direction:column;gap:6px}.nav-btn{width:100%;display:flex;align-items:center;gap:12px;text-align:left;padding:13px 14px;border-radius:10px;border:0;background:transparent;color:#aebbd0;font-weight:590;font-size:14px}.nav-btn:hover{background:#1d2e49;color:white}.nav-btn.active{background:#1b3b3d;color:#b8f7de}.nav-icon{font-size:17px;width:22px;text-align:center;line-height:1}.sidebar-foot{margin-top:auto;padding:17px 11px 0;border-top:1px solid #26354c;color:#8b9ab1;font-size:11.5px;line-height:1.65}.s-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#12b981;margin-right:6px}.main{margin-left:242px;width:calc(100% - 242px);min-height:100vh;padding:30px clamp(22px,4vw,56px) 65px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:28px}.eyebrow{color:var(--mint);font-weight:760;letter-spacing:1.4px;text-transform:uppercase;font-size:11px}.topbar h1{margin:6px 0 0;font-size:27px;letter-spacing:-.7px;font-weight:800}.tag{padding:9px 13px;background:white;border:1px solid var(--line);border-radius:100px;color:#667487;white-space:nowrap;font-size:12px}.page{display:none}.page.active{display:block}.lead{color:var(--muted);font-size:14px;margin:0 0 23px;line-height:1.6}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-bottom:21px}.kpi{background:white;border:1px solid var(--line);box-shadow:var(--shadow);padding:22px;border-radius:16px}.kpi-icon{width:36px;height:36px;background:#eaf3ff;display:grid;place-items:center;border-radius:10px;margin-bottom:20px;font-size:17px}.kpi.green .kpi-icon{background:var(--mint-soft)}.kpi.orange .kpi-icon{background:#fff1da}.kpi.purple .kpi-icon{background:#f0e9ff}.kpi-label{color:var(--muted);font-size:12px;font-weight:550}.kpi-value{font-size:31px;letter-spacing:-1.15px;font-weight:790;margin-top:5px}.layout-2{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr);gap:18px}.panel{background:white;border:1px solid var(--line);box-shadow:var(--shadow);padding:22px;border-radius:16px;margin-bottom:18px}.panel-title{font-size:16px;font-weight:760;letter-spacing:-.3px;margin:0 0 16px}.panel-sub{font-size:12px;color:var(--muted);margin:-8px 0 18px;line-height:1.55}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field label{font-size:12px;font-weight:690;color:#48576b}.field input,.field select{width:100%;height:44px;padding:0 13px;border:1px solid #dbe2eb;border-radius:9px;outline:0;font-size:14px}.field input:focus,.field select:focus{border-color:var(--mint);box-shadow:0 0 0 3px #12b98121}.field input:disabled,.field select:disabled{background:#f4f6f8;color:#8490a0}.scan-box{border:1.5px dashed #a2dac8;background:#f1fcf8;padding:22px;border-radius:13px;margin-top:18px}.scan-box.output{background:#f2f6ff;border-color:#aabde4}.scan-label{font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#238363}.scan-box.output .scan-label{color:#426bb2}.scan-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.scanner-input{width:100%;height:60px;border:1px solid #9ad7c1;border-radius:10px;padding:0 17px;margin:13px 0 8px;font-size:23px;font-weight:670;letter-spacing:1px;outline:none;background:white;font-variant-numeric:tabular-nums}.output .scanner-input{border-color:#aabde4}.scanner-input:focus{box-shadow:0 0 0 4px #12b98123}.micro{font-size:11.5px;line-height:1.55;color:var(--muted)}.button-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{padding:11px 17px;border-radius:9px;border:1px solid transparent;font-weight:740;font-size:13px;line-height:1.3}.btn.primary{background:var(--mint);color:#052b1e}.btn.primary:hover{background:#0eac77}.btn.dark{background:#1d314c;color:white}.btn.ghost{border-color:#dce4eb;background:white;color:#4b5c70}.btn.danger{background:#fff0f1;border-color:#f1cdd1;color:#b42d3d}.btn.sm{padding:7px 11px;font-size:11px}.btn:focus-visible,.nav-btn:focus-visible{outline:3px solid #75dcc0;outline-offset:2px}.lot{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:#f6f9fb;border:1px solid #e6eaf0;border-radius:12px;padding:17px;margin-top:15px}.lot-code{font-weight:790;letter-spacing:.4px;font-size:16px;margin:6px 0 3px}.pill{border-radius:100px;padding:6px 10px;font-size:10px;font-weight:780;background:#e9edf3;color:#778397;white-space:nowrap}.pill.on{background:#ddf8eb;color:#08764c}.pill.off{background:#f2f4f7;color:#78869a}.lot-small{font-size:12px;color:var(--muted);line-height:1.65}.simple-table{width:100%;border-collapse:collapse;white-space:nowrap}.table-wrap{overflow:auto;max-width:100%}.simple-table th{text-align:left;color:#8794a5;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:12px;border-bottom:1px solid var(--line)}.simple-table td{font-size:12.5px;border-bottom:1px solid #edf0f4;padding:12px;color:#38475e}.simple-table tbody tr:last-child td{border-bottom:0}.mono{font-variant-numeric:tabular-nums;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:690;letter-spacing:.2px}.empty{text-align:center;padding:35px 16px;color:#8390a2;font-size:13px;line-height:1.7}.empty-icon{font-size:27px;display:block;margin-bottom:10px}.bar-row{display:grid;grid-template-columns:minmax(80px,1fr) 52px;gap:9px;align-items:center;font-size:12px;margin-bottom:14px}.bar-label{display:block;color:#4a5870;margin-bottom:7px;font-weight:600}.track{height:8px;border-radius:5px;background:#edf1f4;overflow:hidden}.bar{height:100%;background:var(--mint);border-radius:5px}.bar-count{text-align:right;font-weight:780;color:#526077}.section-top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:15px}.section-top h2{font-size:17px;margin:0}.filter{display:flex;gap:11px;flex-wrap:wrap;align-items:center}.filter input,.filter select{min-height:39px;border:1px solid #dbe2eb;border-radius:9px;padding:0 11px;font-size:12px;min-width:140px}.filter input{min-width:200px;flex:1}.mini-note{font-size:11px;color:var(--muted);margin:12px 0 0}.stock-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:16px}.stock-chip{background:#f8fafb;border:1px solid #ebeff2;padding:15px;border-radius:11px}.stock-chip b{display:block;font-size:20px}.stock-chip span{font-size:11px;color:#8995a3}.info-box{border-left:3px solid #12b981;background:#f1fcf7;padding:12px 14px;color:#28674f;border-radius:5px;font-size:12px;line-height:1.6}.warn-box{border-left:3px solid #e3a62b;background:#fffbef;padding:12px 14px;color:#805d17;border-radius:5px;font-size:12px;line-height:1.6;margin-bottom:15px}.list-line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f0f2f5}.list-line:last-child{border-bottom:0}.list-line strong{font-size:12.5px}.list-line small{display:block;color:var(--muted);font-size:11px;margin-top:4px}.catalog-add{display:flex;gap:10px}.catalog-add input{flex:1;min-width:0;height:42px;border:1px solid #dae2ea;border-radius:9px;padding:0 12px;outline:0}.catalog-add input:focus{border-color:var(--mint)}.security{display:grid;grid-template-columns:1fr 1fr;gap:15px}.security .panel{margin:0}.switch{display:none}.toast{position:fixed;right:25px;bottom:25px;min-width:270px;max-width:min(420px,calc(100vw - 40px));background:#152d32;color:white;padding:15px 18px;border-radius:12px;box-shadow:0 14px 36px #0b17332f;font-size:13px;font-weight:600;z-index:20;display:none;line-height:1.5}.toast.error{background:#a02d3b}.toast.show{display:block}.status-text{font-size:12px;color:#768699}.status-text strong{font-size:12px;color:#0c8e65}.chip-link{color:#168566;font-weight:700;font-size:12px}.footer-note{color:#9aa5b4;text-align:center;font-size:11px;margin-top:27px;line-height:1.6}
+    .developer-credit{border-top:1px solid #26354c;margin-top:14px;padding-top:13px}.developer-credit .credit-label{display:block;font-size:10px;letter-spacing:1.1px;text-transform:uppercase;color:#90a4bd}.developer-credit strong{display:block;font-size:12px;letter-spacing:.35px;color:#d7faec;margin-top:2px}.about-hero{background:#101d32;color:#fff;border-radius:16px;padding:29px;margin-bottom:18px;box-shadow:var(--shadow)}.about-hero small{color:#9fb5c8;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:760}.about-hero h2{font-size:25px;margin:10px 0 4px}.about-hero p{font-size:13px;color:#c6d2df;margin:0;line-height:1.8}.about-hero b{color:#9af5cc}.install-steps{line-height:1.9;font-size:13px;color:#48576b;padding-left:20px}.install-steps li{margin:6px 0}
+    @media(max-width:1120px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.layout-2{grid-template-columns:1fr}.main{padding:24px 24px 50px}}@media(max-width:740px){.sidebar{position:sticky;width:100%;min-height:0;height:auto;padding:12px;top:0;overflow:auto;flex-direction:row;align-items:center;gap:8px}.brand{padding:0;flex-shrink:0}.brand-sub,.brand-title,.sidebar-foot{display:none}.brand-icon{width:37px;height:37px}.nav{flex-direction:row;gap:4px;overflow:auto}.nav-btn{font-size:0;width:auto;padding:10px 10px}.nav-icon{font-size:20px}.main{margin-left:0;width:100%;padding:22px 15px}.topbar h1{font-size:22px}.topbar .tag{display:none}body{display:block}.fields,.security{grid-template-columns:1fr}.cards{gap:9px}.kpi{padding:16px}.kpi-value{font-size:26px}.panel{padding:16px}.scanner-input{font-size:19px}.section-top{align-items:flex-start;flex-direction:column}.filter{width:100%}.filter input,.filter select{width:100%}.stock-summary{gap:7px}.stock-chip{padding:10px}.stock-chip b{font-size:17px}}
+
+    .lot-actions{display:flex;gap:7px;align-items:center;white-space:nowrap}.btn.danger:hover{background:#ffe0e4}.field+.field{margin-top:0}
+    @media(max-width:1200px){.sidebar{width:215px}.main{margin-left:215px;width:calc(100% - 215px);padding:24px}.cards{gap:10px}.kpi{padding:17px}.layout-2{grid-template-columns:1fr}.kpi-value{font-size:26px}}
+    @media(max-width:760px){body{display:block}.sidebar{position:static;width:100%;min-height:0;padding:15px}.brand{padding-bottom:15px}.nav{flex-direction:row;flex-wrap:wrap}.nav-btn{width:auto;padding:8px 11px;font-size:12px}.sidebar-foot{display:none}.main{margin-left:0;width:100%;padding:18px 12px}.cards{grid-template-columns:repeat(2,1fr)}.panel{padding:15px}.fields{grid-template-columns:1fr}.topbar{flex-wrap:wrap}.lot-actions{flex-wrap:wrap}.security{grid-template-columns:1fr}}
+
+    .entry-stage{grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);align-items:start}
+    .recent-panel{position:sticky;top:18px;border-color:#d1eadf}.recent-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;background:#f1fcf7;padding:13px;border-radius:11px;margin-bottom:13px}
+    .recent-number{font-size:31px;font-weight:820;letter-spacing:-1px;color:#087450;margin-top:3px}.recent-number small{display:block;font-size:11px;font-weight:600;color:#5d8b77;letter-spacing:0}
+    .recent-scroll{max-height:420px;overflow-y:auto}.recent-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 5px;border-bottom:1px solid #edf1f4}.recent-row.latest{background:#eafaf1;border-radius:8px;padding-left:10px;padding-right:8px}.recent-data{min-width:0;overflow-wrap:anywhere}.recent-data strong{font-size:13px;display:block}.recent-data small{display:block;font-size:10.5px;color:#8994a3;margin-top:3px;line-height:1.35}
+    .choice-list{max-height:355px;overflow-y:auto;border:1px solid #e0e8f0;border-radius:12px;background:#fbfcfe}.choice-item{display:flex;gap:13px;align-items:center;min-height:53px;padding:11px 14px;border-bottom:1px solid #e9edf2;cursor:pointer}.choice-item:last-of-type{border-bottom:0}.choice-item:hover{background:#f3fbf8}.choice-item:has(input:checked){background:#eafbf3}.choice-item input{width:18px;height:18px;accent-color:#0fa876;flex:0 0 auto}.choice-code{font-size:13px;overflow-wrap:anywhere;min-width:100px}.choice-date{margin-left:auto;font-size:11px;color:#8391a2;text-align:right}.button-stack{display:flex;flex-direction:column;gap:10px;margin-top:18px}.button-stack .btn{width:100%;text-align:center}
+    @media(max-width:1200px){.entry-stage{grid-template-columns:1fr}.recent-panel{position:static}.choice-item{flex-wrap:wrap}.choice-date{margin-left:0}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">▤</div><div><div class="brand-title">Controle IMEI</div><div class="brand-sub">GESTÃO DE APARELHOS</div></div></div>
+    <nav class="nav" aria-label="Navegação">
+      <button class="nav-btn active" data-page-nav="painel" title="Painel"><span class="nav-icon">▦</span> Painel</button>
+      <button class="nav-btn" data-page-nav="entradas" title="Entradas"><span class="nav-icon">↘</span> Entradas</button>
+      <button class="nav-btn" data-page-nav="saidas" title="Saídas"><span class="nav-icon">↗</span> Saídas</button>
+      <button class="nav-btn" data-page-nav="lotes" title="Lotes"><span class="nav-icon">▦</span> Lotes</button>
+      <button class="nav-btn" data-page-nav="estoque" title="Estoque"><span class="nav-icon">▤</span> Estoque</button>
+      <button class="nav-btn" data-page-nav="cadastros" title="Cadastros"><span class="nav-icon">⚙</span> Cadastros</button>
+      <button class="nav-btn" data-page-nav="backup" title="Backup"><span class="nav-icon">⛁</span> Backup</button>
+      <button class="nav-btn" data-page-nav="sobre" title="Sobre"><span class="nav-icon">ⓘ</span> Sobre</button>
+    </nav>
+    <div class="sidebar-foot"><div><span class="s-dot" id="save-dot"></span><span id="save-label">Carregando os dados…</span></div><div>Funciona sem internet.<br>Guarde backups fora do navegador.</div><div class="developer-credit"><span class="credit-label">Desenvolvido por</span><strong>CARLOS FRANÇA</strong></div></div>
+  </aside>
+  <main class="main">
+    <div class="topbar"><div><div class="eyebrow">Sistema de inventário</div><h1 id="page-heading">Visão geral</h1></div><span class="tag">🔒 Dados neste Mac • Offline</span></div>
+    <section class="page active" id="page-painel"><div id="dashboard-content"></div></section>
+    <section class="page" id="page-entradas"><div id="entries-content"></div></section>
+    <section class="page" id="page-saidas"><div id="exits-content"></div></section>
+    <section class="page" id="page-lotes"><div id="lots-content"></div></section>
+    <section class="page" id="page-estoque"><div id="stock-content"></div></section>
+    <section class="page" id="page-cadastros"><div id="catalog-content"></div></section>
+    <section class="page" id="page-backup"><div id="backup-content"></div></section>
+    <section class="page" id="page-sobre"><div class="about-hero"><small>Créditos do software</small><h2>Controle IMEI</h2><p>Desenvolvido por <b>CARLOS FRANÇA</b></p><p>Versão 1.4 • Sistema de inventário de aparelhos</p></div><div class="panel"><h3 class="panel-title">Instalação no Mac</h3><ol class="install-steps"><li>Descompacte o pacote recebido.</li><li>Arraste <strong>Controle IMEI.app</strong> para a pasta <strong>Aplicativos</strong> no Finder.</li><li>Abra o aplicativo em <strong>Aplicativos</strong>. Na primeira execução, o macOS pode solicitar autorização de segurança.</li><li>Para deixar um atalho permanente no Dock, arraste <strong>Controle IMEI.app</strong> da pasta Aplicativos para o Dock.</li></ol><div class="warn-box">Esta versão abre o sistema no Safari e guarda os dados localmente no navegador. Para proteger seu estoque, exporte backups JSON regularmente.</div></div></section>
+    <div class="footer-note"><strong>Desenvolvido por CARLOS FRANÇA</strong> • Controle IMEI 1.4 • Faça backup JSON regularmente.</div>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input type="file" class="switch" id="import-file" accept=".json,application/json" aria-label="Importar backup JSON">
+<script>
+(function(){
+  'use strict';
+  const KEY='imeicontrol.v1.data';
+  const HEADINGS={painel:'Visão geral',entradas:'Registrar entradas',saidas:'Registrar saídas',lotes:'Gerenciar lotes',estoque:'Estoque atual',cadastros:'Lojas e modelos',backup:'Backup e exportação',sobre:'Sobre o sistema'};
+  const initial=()=>({version:1,updatedAt:new Date().toISOString(),stores:[{id:'loja-1',name:'Loja 1'},{id:'loja-2',name:'Loja 2'}],models:[{id:'m1',name:'iPhone 14 Pro Max'},{id:'m2',name:'iPhone 17 Pro Max'}],lots:[],entries:[],exits:[],activeLotId:null,preferences:{storeId:'loja-1',modelId:'m1',destination:'Venda'}});
+  let db=initial(),page='painel',storageKind='loading',toastTimeout=null,scanTimer=null,ready=false;
+  const ui={entryLotId:'all',stockTerm:'',stockStore:'all',stockModel:'all',entryTerm:'',exitTerm:'',exitLotId:'all',lotTerm:'',lotStatus:'all',exitSelectTerm:'',exitSelectedIds:new Set()};
+  const $=(selector)=>document.querySelector(selector);
+  const el=(id)=>document.getElementById(id);
+  const h=(v)=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const unique=()=>typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():'id-'+Date.now()+'-'+Math.random().toString(16).slice(2);
+  const fmt=(stamp)=>stamp?new Date(stamp).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'—';
+  const dmy=(stamp)=>stamp?new Date(stamp).toLocaleDateString('pt-BR'):'—';
+  const storeName=id=>db.stores.find(s=>s.id===id)?.name||'Loja excluída';
+  const modelName=id=>db.models.find(s=>s.id===id)?.name||'Modelo excluído';
+  const activeLot=()=>db.lots.find(l=>l.id===db.activeLotId&&l.closedAt==null)||null;
+  const outIds=()=>new Set(db.exits.map(x=>x.entryId));
+  const available=()=>{const outs=outIds();return db.entries.filter(r=>!outs.has(r.id));};
+  const lotLabel=(id)=>db.lots.find(l=>l.id===id)?.code||'Lote não encontrado';
+  const exitLotId=(x)=>x.lotId||db.entries.find(e=>e.id===x.entryId)?.lotId||null;
+  const availableFromLot=(id)=>available().filter(e=>e.lotId===id);
+  const lotStats=(lot)=>{const entries=db.entries.filter(e=>e.lotId===lot.id);const out=outIds();return {entries:entries.length,available:entries.filter(e=>!out.has(e.id)).length,exits:entries.filter(e=>out.has(e.id)).length};};
+  const sorted=(arr)=>[...arr].sort((a,b)=>(b.at||b.openedAt||'').localeCompare(a.at||a.openedAt||''));
+  const options=(arr,value)=>arr.map(item=>`<option value="${h(item.id)}" ${item.id===value?'selected':''}>${h(item.name)}</option>`).join('');
+  const escapeCSV=(v)=>{let str=String(v??'');if(/^[=+@\-\t\r]/.test(str))str="'"+str;return '"'+str.replace(/"/g,'""')+'"';};
+  const panelEmpty=(text)=>`<div class="empty"><span class="empty-icon">▢</span>${h(text)}</div>`;
+  const stockBadge=(v)=>`<span class="pill ${v?'on':'off'}">${v?'Em estoque':'Saiu'}</span>`;
+  function toast(msg,error=false){const t=el('toast');t.textContent=msg;t.className='toast show'+(error?' error':'');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>t.classList.remove('show'),4300);}
+  function safeLocalGet(){try{return localStorage.getItem(KEY);}catch{return null;}}
+  function safeLocalSet(s){try{localStorage.setItem(KEY,s);return true;}catch{return false;}}
+  function openIDB(){return new Promise((resolve,reject)=>{try{const req=indexedDB.open('ControleIMEI-Local',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('data'))req.result.createObjectStore('data');};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);}catch(e){reject(e);}});}
+  async function getFromIDB(){const conn=await openIDB();return new Promise((resolve,reject)=>{const t=conn.transaction('data','readonly');const req=t.objectStore('data').get('main');req.onsuccess=()=>{resolve(req.result||null);conn.close();};req.onerror=()=>{reject(req.error);conn.close();};});}
+  async function setToIDB(value){const conn=await openIDB();return new Promise((resolve,reject)=>{const t=conn.transaction('data','readwrite');t.objectStore('data').put(value,'main');t.oncomplete=()=>{conn.close();resolve();};t.onerror=()=>{conn.close();reject(t.error);};});}
+  function validate(data){
+    if(!data||data.version!==1||!Array.isArray(data.stores)||!Array.isArray(data.models)||!Array.isArray(data.lots)||!Array.isArray(data.entries)||!Array.isArray(data.exits)||!data.preferences)throw Error('Este arquivo não é um backup válido do Controle IMEI.');
+    for(const a of ['stores','models','lots','entries','exits'])if(data[a].length>500000)throw Error('Arquivo grande demais para importar com segurança.');
+    const clean={...data,activeLotId:data.activeLotId??null};
+    if(!clean.stores.length||!clean.models.length)throw Error('O arquivo precisa conter pelo menos uma loja e um modelo.');
+    for(const s of [...clean.stores,...clean.models])if(typeof s.name!=='string'||typeof s.id!=='string')throw Error('Cadastros inválidos.');
+    for(const e of clean.entries)if(typeof e.imei!=='string'||!/^[0-9]{1,40}$/.test(e.imei)||typeof e.id!=='string')throw Error('O backup contém códigos inválidos.');
+    clean.preferences={storeId:data.preferences.storeId||clean.stores[0].id,modelId:data.preferences.modelId||clean.models[0].id,destination:data.preferences.destination||'Venda'};
+    return clean;
+  }
+  let persistQueue=Promise.resolve();
+  function persist(){
+    db.updatedAt=new Date().toISOString();
+    const frozen=JSON.stringify(db);
+    const localOK=safeLocalSet(frozen);
+    persistQueue=persistQueue.then(async()=>{
+      let idbOK=false;try{await setToIDB(frozen);idbOK=true;}catch{}
+      if(idbOK||localOK){storageKind=idbOK?'Salvo no Mac':'Salvo no navegador';}else{storageKind='ERRO: backup necessário';toast('Atenção: este navegador não conseguiu salvar. Exporte um backup JSON agora.',true);}
+      status();
+    });
+    return persistQueue;
+  }
+  function status(){el('save-label').textContent=storageKind;el('save-dot').style.background=storageKind.startsWith('ERRO')?'#ee5e6e':storageKind==='loading'?'#e4bb48':'#12b981';}
+  async function init(){
+    const local=safeLocalGet();let fromLocal=null,fromIDB=null;
+    try{if(local)fromLocal=validate(JSON.parse(local));}catch{}
+    try{const v=await getFromIDB();if(v)fromIDB=validate(JSON.parse(v));}catch{}
+    const candidates=[fromLocal,fromIDB].filter(Boolean).sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||''));
+    if(candidates.length)db=candidates[0];
+    ready=true;render();
+    await persist();
+    if(!candidates.length)toast('Sistema pronto! Cadastre sua loja ou comece um lote para registrar IMEIs.');
+  }
+  function selectPage(p){if(!HEADINGS[p])return;page=p;render();if(p==='entradas')setTimeout(()=>el('entry-scan')?.focus(),30);if(p==='saidas')setTimeout(()=>el('exit-scan')?.focus(),30);}
+  function render(){
+    if(!ready)return;
+    el('page-heading').textContent=HEADINGS[page];
+    document.querySelectorAll('[data-page-nav]').forEach(b=>b.classList.toggle('active',b.dataset.pageNav===page));
+    document.querySelectorAll('.page').forEach(s=>s.classList.toggle('active',s.id==='page-'+page));
+    if(page==='painel')renderDashboard();if(page==='entradas')renderEntries();if(page==='saidas')renderExits();if(page==='lotes')renderLots();if(page==='estoque')renderStock();if(page==='cadastros')renderCatalog();if(page==='backup')renderBackup();
+  }
+  function rowEntry(e,withAction=false){const taken=outIds().has(e.id);return `<tr><td class="mono">${h(e.imei)}</td><td>${h(modelName(e.modelId))}</td><td>${h(storeName(e.storeId))}</td><td>${h(lotLabel(e.lotId))}</td><td>${h(fmt(e.at))}</td>${withAction?`<td><div class="lot-actions"><span class="pill ${taken?'off':'on'}">${taken?'Saiu':'Em estoque'}</span><button type="button" class="btn danger sm" data-action="delete-entry" data-id="${h(e.id)}" aria-label="Excluir código ${h(e.imei)}">Excluir</button></div></td>`:''}</tr>`;}
+  function rowExit(x){return `<tr><td class="mono">${h(x.imei)}</td><td>${h(modelName(x.modelId))}</td><td class="mono">${h(lotLabel(exitLotId(x)))}</td><td>${h(x.destination)}</td><td>${h(fmt(x.at))}</td></tr>`;}
+  function renderDashboard(){
+    const stock=available(),outs=db.exits,counts={};for(const r of stock){const key=r.modelId;counts[key]=(counts[key]||0)+1;}
+    const models=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,7);
+    el('dashboard-content').innerHTML=`<p class="lead">Acompanhe entradas, saídas e disponibilidade dos aparelhos em tempo real.</p>
+    <div class="cards">
+      <div class="kpi green"><div class="kpi-icon">▣</div><div class="kpi-label">Aparelhos em estoque</div><div class="kpi-value">${stock.length.toLocaleString('pt-BR')}</div></div>
+      <div class="kpi"><div class="kpi-icon">↘</div><div class="kpi-label">Entradas registradas</div><div class="kpi-value">${db.entries.length.toLocaleString('pt-BR')}</div></div>
+      <div class="kpi orange"><div class="kpi-icon">↗</div><div class="kpi-label">Saídas registradas</div><div class="kpi-value">${outs.length.toLocaleString('pt-BR')}</div></div>
+      <div class="kpi purple"><div class="kpi-icon">▦</div><div class="kpi-label">Lotes cadastrados</div><div class="kpi-value">${db.lots.length.toLocaleString('pt-BR')}</div></div>
+    </div><div class="layout-2"><div class="panel"><div class="section-top"><h2>Últimas entradas</h2><button class="btn ghost sm" data-action="goto-entradas">Registrar entrada</button></div>
+    <div class="table-wrap">${db.entries.length?`<table class="simple-table"><thead><tr><th>IMEI / código</th><th>Modelo</th><th>Loja</th><th>Lote</th><th>Data</th></tr></thead><tbody>${sorted(db.entries).slice(0,8).map(rowEntry).join('')}</tbody></table>`:panelEmpty('Nenhuma entrada registrada ainda.')}</div></div>
+    <div class="panel"><h3 class="panel-title">Estoque por modelo</h3>${models.length?models.map(([id,count])=>`<div class="bar-row"><div><span class="bar-label">${h(modelName(id))}</span><div class="track"><div class="bar" style="width:${Math.round(100*count/stock.length)}%"></div></div></div><span class="bar-count">${count}</span></div>`).join(''):panelEmpty('O estoque está vazio.')}
+    <div class="info-box" style="margin-top:20px">Os IMEIs e códigos internos são únicos no estoque. Um aparelho só pode sair depois de ter sido cadastrado como entrada.</div></div></div>`;
+  }
+  function filteredEntries(){
+    const term=ui.entryTerm.trim().toLowerCase();
+    return sorted(db.entries).filter(e=>(ui.entryLotId==='all'||e.lotId===ui.entryLotId)&&(!term||[e.imei,lotLabel(e.lotId),modelName(e.modelId),storeName(e.storeId)].some(v=>String(v).toLowerCase().includes(term))));
+  }
+  function entriesTable(rows){
+    return rows.length?`<table class="simple-table"><thead><tr><th>IMEI / código</th><th>Modelo</th><th>Loja</th><th>Lote</th><th>Data</th><th>Situação / Ação</th></tr></thead><tbody>${rows.slice(0,150).map(e=>rowEntry(e,true)).join('')}</tbody></table>${rows.length>150?'<p class="mini-note">Mostrando 150 registros. Use a busca para encontrar outros códigos.</p>':''}`:panelEmpty('Nenhum código encontrado.');
+  }
+  function renderRecentEntries(){
+    const latestLot=activeLot()||sorted(db.lots)[0];
+    const recent=latestLot?sorted(db.entries.filter(e=>e.lotId===latestLot.id)).slice(0,14):[];
+    const out=outIds();
+    return `<div class="recent-header"><div><div class="micro">${latestLot?'Lote '+h(latestLot.code):'Sem lote cadastrado'}</div><div class="recent-number">${latestLot?db.entries.filter(e=>e.lotId===latestLot.id).length:0}<small>códigos no lote</small></div></div><span class="pill ${latestLot&&!latestLot.closedAt?'on':'off'}">${latestLot&&!latestLot.closedAt?'EM LEITURA':'CONFERÊNCIA'}</span></div>
+      <div class="recent-scroll" id="entry-recent-list" aria-live="polite">${recent.length?recent.map((e,i)=>`<div class="recent-row ${i===0?'latest':''}"><div class="recent-data"><strong class="mono">${h(e.imei)}</strong><small>${i===0?'✓ Último registrado • ':''}${h(fmt(e.at))} • ${out.has(e.id)?'Saiu':'Em estoque'}</small></div><button type="button" class="btn danger sm" data-action="delete-entry" data-id="${h(e.id)}" aria-label="Excluir código ${h(e.imei)}">Excluir</button></div>`).join(''):panelEmpty('O primeiro código aparecerá aqui assim que for registrado.')}</div>
+      <p class="mini-note">Os últimos 14 números ficam aqui para conferência. Para apagar um número errado, use <strong>Excluir</strong> na linha dele; os outros permanecem no lote.</p>`;
+  }
+  function renderEntries(){
+    const lot=activeLot(),lotCount=lot?db.entries.filter(e=>e.lotId===lot.id).length:0;
+    if(ui.entryLotId!=='all'&&!db.lots.some(l=>l.id===ui.entryLotId))ui.entryLotId='all';
+    const records=filteredEntries();
+    const lotOptions=sorted(db.lots).map(l=>`<option value="${h(l.id)}" ${ui.entryLotId===l.id?'selected':''}>${h(l.code)} — ${h(modelName(l.modelId))}</option>`).join('');
+    el('entries-content').innerHTML=`<p class="lead">Bipe ou digite o código. A entrada é registrada, o total aumenta e o número aparece imediatamente na <strong>conferência ao lado</strong>.</p>
+    <div class="layout-2 entry-stage"><div>
+      <div class="panel"><h3 class="panel-title">1. Preparar lote de entrada</h3><div class="fields">
+      <div class="field"><label for="entry-store">Loja</label><select id="entry-store" ${lot?'disabled':''}>${options(db.stores,lot?lot.storeId:db.preferences.storeId)}</select></div>
+      <div class="field"><label for="entry-model">Modelo do aparelho</label><select id="entry-model" ${lot?'disabled':''}>${options(db.models,lot?lot.modelId:db.preferences.modelId)}</select></div>
+      </div><div class="lot"><div><div class="micro">Lote ${lot?'em andamento':'não iniciado'}</div><div class="lot-code">${h(lot?.code||'Nenhum lote aberto')}</div><div class="lot-small">${lot?`${h(storeName(lot.storeId))} • ${h(modelName(lot.modelId))} • ${lotCount} código(s) registrado(s)`:'Inicie um lote antes de bipar.'}</div></div><span class="pill ${lot?'on':'off'}">${lot?'ATIVO':'INATIVO'}</span></div>
+      <div class="button-row"><button class="btn primary" data-action="start-lot" ${lot?'disabled':''}>+ Iniciar lote</button><button class="btn ghost" data-action="finish-lot" ${lot?'':'disabled'}>Finalizar lote</button></div></div>
+      <div class="panel"><h3 class="panel-title">2. Bipar ou digitar números</h3><div class="scan-box"><div class="scan-head"><span class="scan-label">◉ Entrada automática</span><span class="status-text">${lot?'<strong>Leitor pronto</strong>':'Aguardando lote'}</span></div>
+      <input id="entry-scan" class="scanner-input" inputmode="numeric" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Bipe ou digite o número" ${lot?'':'disabled'} aria-label="Código de entrada">
+      <div class="micro"><strong>Leitor:</strong> registre pelo bipe (Enter do leitor ou pausa curta). <strong>Digitação:</strong> pressione Enter ou aguarde cerca de 1,8 segundo após o último número. Aceita de 1 a 40 dígitos, inclusive zeros à esquerda.</div>
+      <div class="button-row"><button type="button" class="btn primary" data-action="register-entry" ${lot?'':'disabled'}>✓ Registrar agora</button><button type="button" class="btn ghost" data-action="generate-code" ${lot?'':'disabled'}>Gerar número aleatório</button></div>
+      <p class="mini-note">Números aleatórios são apenas códigos internos, não IMEIs oficiais.</p></div>
+      </div></div>
+      <div class="panel recent-panel"><div class="section-top"><h3 class="panel-title" style="margin:0">✓ Conferência dos últimos bipados</h3><span class="pill on">ATUALIZA AO BIPAR</span></div>${renderRecentEntries()}</div>
+    </div>
+    <div class="panel"><div class="section-top"><h3 class="panel-title" style="margin:0">Todas as entradas (${db.entries.length})</h3><button class="btn ghost sm" data-action="csv-entries">Exportar CSV</button></div><div class="filter"><input id="entry-search" autocomplete="off" placeholder="Buscar número, lote, loja ou modelo" value="${h(ui.entryTerm)}" aria-label="Buscar entradas"><select id="entry-lot-filter"><option value="all" ${ui.entryLotId==='all'?'selected':''}>Todos os lotes</option>${lotOptions}</select></div><p class="mini-note" id="entry-result-count">${records.length} registro(s) encontrado(s) • Excluir um código não apaga o lote</p><div class="table-wrap" id="entries-list" style="margin-top:12px">${entriesTable(records)}</div></div>`;
+  }
+  function deleteEntry(id){
+    const entry=db.entries.find(e=>e.id===id);if(!entry)return;
+    const linked=db.exits.filter(x=>x.entryId===id);
+    const warning=linked.length?`\n\nATENÇÃO: esse código já teve ${linked.length} saída(s). A(s) saída(s) vinculada(s) também será(ão) apagada(s).`:'';
+    if(!confirm(`Excluir somente o código ${entry.imei}?\n\nModelo: ${modelName(entry.modelId)}\nLote: ${lotLabel(entry.lotId)}\nLoja: ${storeName(entry.storeId)}${warning}\n\nIsso não exclui os outros códigos do lote. A operação não pode ser desfeita sem backup.`))return;
+    db.entries=db.entries.filter(e=>e.id!==id);
+    db.exits=db.exits.filter(x=>x.entryId!==id);
+    persist();render();toast('Código '+entry.imei+' excluído da entrada. Estoque atualizado.');
+  }
+  function generateCode(){
+    const input=el('entry-scan');if(!input||!activeLot())return;
+    const existing=new Set(db.entries.map(e=>e.imei));let code='';
+    for(let attempts=0;attempts<30;attempts++){
+      const values=new Uint32Array(1);if(typeof crypto!=='undefined'&&crypto.getRandomValues){crypto.getRandomValues(values);code=String(values[0]).padStart(10,'0').slice(-10);}else{code=String(Math.floor(Math.random()*1e10)).padStart(10,'0');}
+      if(!existing.has(code))break;code='';
+    }
+    if(!code){toast('Não foi possível gerar um código único. Tente novamente.',true);return;}
+    input.value=code;input.focus();toast('Código interno gerado: '+code+'. Clique em Registrar entrada para salvar.');
+  }
+  function renderLots(){
+    const term=ui.lotTerm.trim().toLowerCase();
+    const matched=sorted(db.lots).filter(l=>(ui.lotStatus==='all'||(ui.lotStatus==='open')===(l.closedAt==null))&&(!term||[l.code,storeName(l.storeId),modelName(l.modelId)].some(v=>v.toLowerCase().includes(term))));
+    const current=available().length;
+    el('lots-content').innerHTML=`<p class="lead">Todos os lotes ficam aqui. Apague um lote com o botão <strong>Excluir</strong>, ou escolha <strong>Dar saída</strong> para destinar seus IMEIs na aba Saídas.</p>
+    <div class="panel"><div class="section-top"><h3 class="panel-title" style="margin:0">Lotes cadastrados (${db.lots.length})</h3><button class="btn primary sm" data-action="goto-entradas">+ Novo lote</button></div>
+    <div class="filter"><input id="lot-search" autocomplete="off" placeholder="Buscar lote, loja ou modelo" value="${h(ui.lotTerm)}" aria-label="Buscar lote"><select id="lot-status"><option value="all" ${ui.lotStatus==='all'?'selected':''}>Todos os lotes</option><option value="open" ${ui.lotStatus==='open'?'selected':''}>Lotes abertos</option><option value="closed" ${ui.lotStatus==='closed'?'selected':''}>Lotes finalizados</option></select></div>
+    <div id="lots-list" class="table-wrap" style="margin-top:14px">${lotsTable(matched)}</div>
+    <div class="warn-box" style="margin-top:16px"><strong>Atenção:</strong> excluir um lote também apaga definitivamente todas as entradas, saídas e IMEIs associados a ele. O estoque é recalculado. Faça um backup JSON antes de excluir um lote com movimentações.</div></div>`;
+  }
+  function lotsTable(lots){
+    return lots.length?`<table class="simple-table"><thead><tr><th>Lote</th><th>Modelo / loja</th><th>Entradas</th><th>No estoque</th><th>Saídas</th><th>Situação</th><th>Ações</th></tr></thead><tbody>${lots.map(l=>{const st=lotStats(l);return `<tr><td><div class="mono">${h(l.code)}</div><div class="micro">${h(dmy(l.openedAt))}</div></td><td>${h(modelName(l.modelId))}<div class="micro">${h(storeName(l.storeId))}</div></td><td>${st.entries}</td><td><strong>${st.available}</strong></td><td>${st.exits}</td><td><span class="pill ${l.closedAt?'off':'on'}">${l.closedAt?'Finalizado':'Aberto'}</span></td><td><div class="lot-actions"><button class="btn ghost sm" data-action="lot-to-exit" data-id="${h(l.id)}" ${st.available?'':'disabled'}>Dar saída</button><button class="btn danger sm" data-action="delete-lot" data-id="${h(l.id)}">Excluir</button></div></td></tr>`;}).join('')}</tbody></table>`:panelEmpty('Nenhum lote encontrado. Crie um na aba Entradas.');
+  }
+  function exitCandidates(){
+    if(ui.exitLotId==='all')return [];
+    const term=ui.exitSelectTerm.trim().toLowerCase();
+    return availableFromLot(ui.exitLotId).filter(e=>!term||[e.imei,modelName(e.modelId)].some(s=>s.toLowerCase().includes(term)));
+  }
+  function renderExitChoiceRows(){
+    const lot=db.lots.find(l=>l.id===ui.exitLotId);
+    if(!lot)return panelEmpty('Primeiro selecione um lote de origem.');
+    const found=exitCandidates();
+    if(!found.length)return panelEmpty('Nenhum aparelho disponível corresponde à busca.');
+    return found.slice(0,400).map(e=>`<label class="choice-item"><input type="checkbox" data-exit-select="${h(e.id)}" ${ui.exitSelectedIds.has(e.id)?'checked':''} aria-label="Selecionar ${h(e.imei)}"><span class="choice-code mono">${h(e.imei)}</span><span class="choice-date">Entrada ${h(fmt(e.at))}</span></label>`).join('')+(found.length>400?`<div class="mini-note">Mostrando 400 de ${found.length} aparelhos. Use a busca para localizar os demais.</div>`:'');
+  }
+  function updateExitSelectionUI(){
+    const total=ui.exitSelectedIds.size, all=ui.exitLotId==='all'?0:availableFromLot(ui.exitLotId).length;
+    const count=el('exit-selected-counter');if(count)count.textContent=total+' selecionado(s) de '+all+' disponíveis';
+    const b=el('exit-selected-button');if(b){b.disabled=total===0;b.textContent='↗ Destinar selecionados ('+total+')';}
+    const clear=el('exit-clear-button');if(clear)clear.disabled=total===0;
+    const visible=el('exit-visible-counter');if(visible)visible.textContent=exitCandidates().length+' resultado(s)';
+  }
+  function refreshExitChoices(){const target=el('exit-candidates-list');if(target)target.innerHTML=renderExitChoiceRows();updateExitSelectionUI();}
+  function renderExits(){
+    const lotSelected=db.lots.find(l=>l.id===ui.exitLotId);
+    if(ui.exitLotId!=='all'&&!lotSelected){ui.exitLotId='all';ui.exitSelectedIds.clear();}
+    const availableIds=new Set(ui.exitLotId==='all'?[]:availableFromLot(ui.exitLotId).map(e=>e.id));
+    for(const id of ui.exitSelectedIds)if(!availableIds.has(id))ui.exitSelectedIds.delete(id);
+    const counts=lotSelected?lotStats(lotSelected):null;
+    const lotOptions=sorted(db.lots).map(l=>`<option value="${h(l.id)}" ${ui.exitLotId===l.id?'selected':''}>${h(l.code)} • ${h(modelName(l.modelId))} (${lotStats(l).available} disponíveis)</option>`).join('');
+    const history=ui.exitLotId==='all'?sorted(db.exits):sorted(db.exits.filter(x=>exitLotId(x)===ui.exitLotId));
+    el('exits-content').innerHTML=`<p class="lead">Escolha o <strong>lote de origem</strong> e o <strong>destino</strong>. Depois marque apenas os números que vão sair ou dê saída de todos os aparelhos disponíveis do lote.</p>
+    <div class="layout-2"><div class="panel"><h3 class="panel-title">1. Escolher lote e destino</h3>
+      <div class="field"><label for="exit-lot">Lote de origem</label><select id="exit-lot"><option value="all" ${ui.exitLotId==='all'?'selected':''}>Escolha um lote (ou leitura livre)</option>${lotOptions}</select></div>
+      <div class="field" style="margin-top:15px"><label for="exit-destination">Destino da saída</label><input id="exit-destination" maxlength="100" value="${h(db.preferences.destination||'Venda')}" placeholder="Ex.: Loja Centro, João, Cliente, Assistência"></div>
+      <div class="scan-box output"><div class="scan-head"><span class="scan-label">◉ Ou bipar saída individual</span><span class="status-text">${lotSelected?`${counts.available} disponível(is)`:'Leitura livre'}</span></div><input id="exit-scan" class="scanner-input" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="Bipe um código para dar saída" maxlength="40" aria-label="Código de saída"><div class="micro">Você ainda pode bipar um aparelho para registrar sua saída diretamente. Para vários aparelhos, use a seleção abaixo.</div></div>
+    </div><div class="panel"><h3 class="panel-title">2. Escolher o tipo de saída</h3>
+      <div class="stock-summary" style="grid-template-columns:1fr 1fr"><div class="stock-chip"><b>${counts?counts.entries:'—'}</b><span>Entradas neste lote</span></div><div class="stock-chip"><b>${counts?counts.available:'—'}</b><span>Disponíveis para sair</span></div></div>
+      <p class="micro">Use <strong>Destinar selecionados</strong> para dar baixa somente nos códigos marcados na lista. Ou use <strong>Destinar todo o lote</strong> para todos os disponíveis desse lote.</p>
+      <div class="button-stack"><button id="exit-selected-button" type="button" class="btn primary" data-action="exit-selected" ${ui.exitSelectedIds.size&&lotSelected?'':'disabled'}>↗ Destinar selecionados (${ui.exitSelectedIds.size})</button>
+      <button type="button" class="btn dark" data-action="exit-whole-lot" ${lotSelected&&counts.available>0?'':'disabled'}>↗ Destinar todo o lote${counts?' ('+counts.available+')':''}</button></div>
+      <p class="mini-note">Uma confirmação mostra o lote, o destino e a quantidade antes de dar baixa no estoque.</p></div></div>
+    <div class="panel"><div class="section-top"><div><h3 class="panel-title" style="margin:0">3. Selecionar quais aparelhos vão sair</h3><p class="mini-note" id="exit-selected-counter">${ui.exitSelectedIds.size} selecionado(s) de ${counts?counts.available:0} disponíveis</p></div><span class="pill on" id="exit-visible-counter">${exitCandidates().length} resultado(s)</span></div>
+      ${lotSelected?`<div class="filter"><input id="exit-select-search" autocomplete="off" value="${h(ui.exitSelectTerm)}" placeholder="Buscar código dentro deste lote" aria-label="Buscar códigos para saída"></div><div class="button-row"><button type="button" class="btn ghost sm" data-action="exit-select-visible">✓ Selecionar exibidos</button><button id="exit-clear-button" type="button" class="btn ghost sm" data-action="exit-clear-selection" ${ui.exitSelectedIds.size?'':'disabled'}>Limpar seleção</button></div>`:'<div class="info-box">Escolha um lote acima para visualizar os códigos disponíveis e selecioná-los um a um.</div>'}
+      <div id="exit-candidates-list" class="choice-list" style="margin-top:14px">${renderExitChoiceRows()}</div></div>
+    <div class="panel"><div class="section-top"><h3 class="panel-title" style="margin:0">Histórico ${lotSelected?'do lote '+h(lotSelected.code):'de saídas'}</h3><button class="btn ghost sm" data-action="csv-exits">Exportar CSV</button></div><div class="table-wrap">${history.length?`<table class="simple-table"><thead><tr><th>Código</th><th>Modelo</th><th>Lote de origem</th><th>Destino</th><th>Data</th></tr></thead><tbody>${history.slice(0,100).map(rowExit).join('')}</tbody></table>`:panelEmpty('Nenhuma saída registrada neste lote.')}</div></div>`;
+  }
+  function exitSelected(){
+    const lot=db.lots.find(l=>l.id===ui.exitLotId);if(!lot){toast('Escolha um lote.',true);return;}
+    const rows=availableFromLot(lot.id).filter(e=>ui.exitSelectedIds.has(e.id));
+    if(!rows.length){toast('Marque os aparelhos que devem sair.',true);return;}
+    const dest=el('exit-destination')?.value.trim();if(!dest){toast('Informe o destino das saídas.',true);el('exit-destination')?.focus();return;}
+    if(!confirm(`Destinar ${rows.length} aparelho(s) SELECIONADO(S)?
+
+Lote: ${lot.code}
+Destino: ${dest}
+
+Somente os códigos marcados sairão do estoque. Confirma?`))return;
+    const at=new Date().toISOString();db.preferences.destination=dest;
+    for(const found of rows)db.exits.push({id:unique(),entryId:found.id,lotId:lot.id,imei:found.imei,storeId:found.storeId,modelId:found.modelId,destination:dest,at});
+    ui.exitSelectedIds.clear();ui.exitSelectTerm='';persist();render();toast(rows.length+' aparelho(s) enviado(s) para '+dest+'.');
+  }
+  function deleteLot(id){
+    const lot=db.lots.find(l=>l.id===id);if(!lot)return;
+    const st=lotStats(lot);
+    const message=`Excluir o lote ${lot.code}?\n\nModelo: ${modelName(lot.modelId)}\nLoja: ${storeName(lot.storeId)}\nIMEIs cadastrados: ${st.entries}\nNo estoque: ${st.available}\nSaídas registradas: ${st.exits}\n\nATENÇÃO: isso apagará também os ${st.entries} registros de entrada e as ${st.exits} saídas vinculadas a esse lote. Não será possível desfazer sem backup.\n\nConfirma a exclusão?`;
+    if(!confirm(message))return;
+    const entryIds=new Set(db.entries.filter(e=>e.lotId===id).map(e=>e.id));
+    db.entries=db.entries.filter(e=>e.lotId!==id);
+    db.exits=db.exits.filter(x=>!entryIds.has(x.entryId)&&x.lotId!==id);
+    db.lots=db.lots.filter(l=>l.id!==id);
+    if(db.activeLotId===id)db.activeLotId=null;
+    if(ui.exitLotId===id){ui.exitLotId='all';ui.exitSelectedIds.clear();ui.exitSelectTerm='';}
+    persist();render();toast('Lote '+lot.code+' e seus registros foram excluídos.');
+  }
+  function exitWholeLot(){
+    const lot=db.lots.find(l=>l.id===ui.exitLotId);if(!lot){toast('Selecione um lote de origem.',true);return;}
+    const rows=availableFromLot(lot.id);if(!rows.length){toast('Este lote não possui IMEIs disponíveis.',true);return;}
+    const dest=el('exit-destination')?.value.trim();if(!dest){toast('Informe o destino antes de dar saída do lote.',true);el('exit-destination')?.focus();return;}
+    if(!confirm(`Dar saída de ${rows.length} IMEI(s) do lote ${lot.code} para: ${dest}?\n\nTodos sairão do estoque disponível. Confira o lote e o destino antes de confirmar.`))return;
+    const now=new Date().toISOString();db.preferences.destination=dest;
+    for(const found of rows){db.exits.push({id:unique(),entryId:found.id,lotId:lot.id,imei:found.imei,storeId:found.storeId,modelId:found.modelId,destination:dest,at:now});}
+    ui.exitSelectedIds.clear();ui.exitSelectTerm='';persist();render();toast('Saída do lote '+lot.code+': '+rows.length+' código(s) destinados a '+dest+'.');
+  }
+  function filteredStock(){
+    const term=ui.stockTerm.trim().toLowerCase();return sorted(available()).filter(r=>(ui.stockStore==='all'||r.storeId===ui.stockStore)&&(ui.stockModel==='all'||r.modelId===ui.stockModel)&&(!term||[r.imei,storeName(r.storeId),modelName(r.modelId),db.lots.find(l=>l.id===r.lotId)?.code||''].some(v=>v.toLowerCase().includes(term))));
+  }
+  function renderStock(){
+    const rows=filteredStock();const storeOpt=`<option value="all">Todas as lojas</option>`+options(db.stores,ui.stockStore),modelOpt=`<option value="all">Todos os modelos</option>`+options(db.models,ui.stockModel);
+    const grp=new Set(rows.map(r=>r.modelId));const stores=new Set(rows.map(r=>r.storeId));
+    el('stock-content').innerHTML=`<p class="lead">Consulte os aparelhos disponíveis e encontre qualquer IMEI, modelo, loja ou lote.</p><div class="panel"><div class="stock-summary"><div class="stock-chip"><b>${rows.length}</b><span>IMEIs disponíveis</span></div><div class="stock-chip"><b>${grp.size}</b><span>Modelos com saldo</span></div><div class="stock-chip"><b>${stores.size}</b><span>Lojas com saldo</span></div></div>
+    <div class="filter"><input id="stock-search" autocomplete="off" placeholder="Buscar IMEI, modelo ou lote" value="${h(ui.stockTerm)}" aria-label="Buscar estoque"><select id="stock-store-filter">${storeOpt}</select><select id="stock-model-filter">${modelOpt}</select><button class="btn ghost sm" data-action="csv-stock">Exportar CSV</button></div><div class="table-wrap" style="margin-top:16px" id="stock-list">${stockTable(rows)}</div></div>`;
+  }
+  function stockTable(rows){return rows.length?`<table class="simple-table"><thead><tr><th>IMEI</th><th>Modelo</th><th>Loja</th><th>Lote</th><th>Entrada</th><th>Status</th></tr></thead><tbody>${rows.slice(0,500).map(e=>`<tr><td class="mono">${h(e.imei)}</td><td>${h(modelName(e.modelId))}</td><td>${h(storeName(e.storeId))}</td><td>${h(db.lots.find(l=>l.id===e.lotId)?.code||'—')}</td><td>${h(fmt(e.at))}</td><td>${stockBadge(true)}</td></tr>`).join('')}</tbody></table>${rows.length>500?'<p class="mini-note">Mostrando os primeiros 500 resultados. Exporte o CSV para ver todos.</p>':''}`:panelEmpty('Nenhum aparelho disponível com estes filtros.');}
+  function renderCatalog(){
+    el('catalog-content').innerHTML=`<p class="lead">Personalize as lojas e os modelos. Os nomes iniciais são exemplos e podem ser alterados.</p>
+    <div class="layout-2"><div class="panel"><h3 class="panel-title">Lojas</h3><form id="add-store-form" class="catalog-add"><input id="new-store" maxlength="70" placeholder="Nome da loja" required><button class="btn primary" type="submit">+ Adicionar</button></form><div style="margin-top:15px">${db.stores.map(s=>`<div class="list-line"><div><strong>${h(s.name)}</strong><small>${db.entries.filter(e=>e.storeId===s.id).length} entrada(s)</small></div><button class="btn ghost sm" data-action="rename-store" data-id="${h(s.id)}">Renomear</button></div>`).join('')}</div></div>
+    <div class="panel"><h3 class="panel-title">Modelos de aparelhos</h3><form id="add-model-form" class="catalog-add"><input id="new-model" maxlength="70" placeholder="Ex.: iPhone 16 Pro" required><button class="btn primary" type="submit">+ Adicionar</button></form><div style="margin-top:15px">${db.models.map(m=>`<div class="list-line"><div><strong>${h(m.name)}</strong><small>${db.entries.filter(e=>e.modelId===m.id).length} entrada(s)</small></div><button class="btn ghost sm" data-action="rename-model" data-id="${h(m.id)}">Renomear</button></div>`).join('')}</div></div></div>
+    <div class="info-box">Renomear não altera os registros antigos: os históricos continuam ligados à mesma loja ou ao mesmo modelo.</div>`;
+  }
+  function renderBackup(){
+    el('backup-content').innerHTML=`<p class="lead">Seus dados ficam salvos localmente no navegador deste Mac. Faça cópias em um arquivo JSON para evitar perdas ao limpar dados do navegador, trocar de computador ou reinstalar o sistema.</p>
+    <div class="warn-box"><strong>Importante:</strong> este aplicativo não usa nuvem. A cópia de segurança é essencial. Recomendamos salvar um backup JSON no fim de cada dia de trabalho, preferencialmente também em um pendrive ou armazenamento na nuvem.</div>
+    <div class="security"><div class="panel"><h3 class="panel-title">Salvar backup completo</h3><p class="panel-sub">Guarda lojas, modelos, lotes, todas as entradas e todas as saídas.</p><button class="btn primary" data-action="export-json">⬇ Baixar backup JSON</button><p class="mini-note">Última atualização: ${h(fmt(db.updatedAt))}</p></div>
+    <div class="panel"><h3 class="panel-title">Restaurar um backup</h3><p class="panel-sub">Recupere seus registros de outro dia ou de outro Mac.</p><button class="btn ghost" data-action="import-json">⬆ Importar backup JSON</button><p class="mini-note">Ao importar, os dados atuais serão substituídos após sua confirmação.</p></div></div>
+    <div class="panel" style="margin-top:19px"><h3 class="panel-title">Relatórios para Excel</h3><p class="panel-sub">Exporte os dados em formato CSV, compatível com Excel e Numbers.</p><div class="button-row"><button class="btn ghost" data-action="csv-entries">⬇ Entradas.csv</button><button class="btn ghost" data-action="csv-exits">⬇ Saídas.csv</button><button class="btn ghost" data-action="csv-stock">⬇ Estoque.csv</button></div></div>
+    <div class="panel"><h3 class="panel-title">Como funciona</h3><div class="micro" style="font-size:12.5px;line-height:2">1. Cadastre ou renomeie suas lojas e modelos na aba <strong>Cadastros</strong>.<br>2. Em <strong>Entradas</strong>, escolha loja e modelo, inicie um lote e leia os IMEIs com o scanner.<br>3. Finalize o lote ao concluir as leituras. Gerencie ou exclua lotes na aba <strong>Lotes</strong>.<br>4. Em <strong>Saídas</strong>, escolha o lote de origem e o destino. Dê saída por IMEI ou de todo o lote de uma vez.<br>5. Gere um <strong>backup JSON</strong> regularmente. Não guarde apenas o arquivo HTML.</div></div>`;
+  }
+  function normalizeIMEI(raw){const clean=String(raw??'').trim().replace(/[\s\-]/g,'');return /^\d{1,40}$/.test(clean)?clean:null;}
+  function addEntry(){clearTimeout(scanTimer);typingStats={id:null,first:0,last:0,events:0};const input=el('entry-scan');if(!input)return;const imei=normalizeIMEI(input.value);if(!imei){toast('Código inválido. Use somente números (de 1 a 40 dígitos).',true);input.select();return;}
+    const lot=activeLot();if(!lot){toast('Inicie um lote antes de registrar entradas.',true);return;}
+    if(available().some(e=>e.imei===imei)){toast('Este IMEI já está no estoque. Entrada duplicada bloqueada.',true);input.select();return;}
+    db.entries.push({id:unique(),imei,storeId:lot.storeId,modelId:lot.modelId,lotId:lot.id,at:new Date().toISOString()});persist();render();el('entry-scan')?.focus();toast('✓ Entrada registrada: '+imei+' • Lote atualizado.');
+  }
+  function addExit(){clearTimeout(scanTimer);typingStats={id:null,first:0,last:0,events:0};const input=el('exit-scan');if(!input)return;const imei=normalizeIMEI(input.value);if(!imei){toast('Código inválido. Use somente números (de 1 a 40 dígitos).',true);input.select();return;}
+    const found=available().find(e=>e.imei===imei);if(!found){toast('IMEI não encontrado no estoque disponível.',true);input.select();return;}
+    if(ui.exitLotId!=='all'&&found.lotId!==ui.exitLotId){toast('Este IMEI pertence ao lote '+lotLabel(found.lotId)+', diferente do lote selecionado.',true);input.select();return;}
+    const destination=el('exit-destination')?.value.trim();if(!destination){toast('Informe o destino antes de registrar uma saída.',true);el('exit-destination')?.focus();return;}
+    db.preferences.destination=destination;
+    db.exits.push({id:unique(),entryId:found.id,lotId:found.lotId,imei,storeId:found.storeId,modelId:found.modelId,destination,at:new Date().toISOString()});persist();render();el('exit-scan')?.focus();toast('Saída do lote '+lotLabel(found.lotId)+': '+imei);
+  }
+  function startLot(){if(activeLot()){toast('Finalize o lote atual antes de começar outro.',true);return;}
+    const storeId=el('entry-store')?.value||db.stores[0].id;const modelId=el('entry-model')?.value||db.models[0].id;
+    db.preferences.storeId=storeId;db.preferences.modelId=modelId;
+    const now=new Date();const codeDate=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('');
+    const n=Math.max(0,...db.lots.filter(l=>l.code?.startsWith('L-'+codeDate+'-')).map(l=>Number(l.code.split('-').pop())||0))+1;
+    const id=unique();db.lots.push({id,code:'L-'+codeDate+'-'+String(n).padStart(3,'0'),storeId,modelId,openedAt:now.toISOString(),closedAt:null});db.activeLotId=id;
+    persist();render();el('entry-scan')?.focus();toast('Lote iniciado. Passe o leitor no primeiro IMEI.');
+  }
+  function finishLot(){const lot=activeLot();if(!lot)return;const count=db.entries.filter(e=>e.lotId===lot.id).length;if(!confirm('Finalizar o lote '+lot.code+' com '+count+' aparelho(s)?'))return;lot.closedAt=new Date().toISOString();db.activeLotId=null;persist();render();toast('Lote finalizado com sucesso.');}
+  function download(content,name,type){const blob=new Blob([content],{type});const a=document.createElement('a');const url=URL.createObjectURL(blob);a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+  const stamp=()=>new Date().toISOString().slice(0,10);
+  function exportJSON(){download(JSON.stringify(db,null,2),'Backup_Controle_IMEI_'+stamp()+'.json','application/json;charset=utf-8');toast('Backup completo gerado. Guarde o arquivo em local seguro.');}
+  function exportCSV(which){let header=[],rows=[],name='';
+    if(which==='entries'){name='Entradas';header=['Data','Loja','Modelo','Lote','Sequencia no lote','IMEI','Status atual'];const outs=outIds();rows=sorted(db.entries).map(e=>[fmt(e.at),storeName(e.storeId),modelName(e.modelId),db.lots.find(l=>l.id===e.lotId)?.code||'',db.entries.filter(i=>i.lotId===e.lotId&&i.at<=e.at).length,e.imei,outs.has(e.id)?'Saiu':'Em estoque']);}
+    else if(which==='exits'){name='Saidas';header=['Data','IMEI','Loja','Modelo','Lote de origem','Destino'];rows=sorted(db.exits).map(e=>[fmt(e.at),e.imei,storeName(e.storeId),modelName(e.modelId),lotLabel(exitLotId(e)),e.destination]);}
+    else{name='Estoque';header=['IMEI','Modelo','Loja','Lote','Entrada'];rows=filteredStock().map(e=>[e.imei,modelName(e.modelId),storeName(e.storeId),db.lots.find(l=>l.id===e.lotId)?.code||'',fmt(e.at)]);}
+    download('\ufeff'+[header,...rows].map(row=>row.map(escapeCSV).join(';')).join('\r\n'),name+'_IMEI_'+stamp()+'.csv','text/csv;charset=utf-8');toast('Relatório CSV exportado.');
+  }
+  async function importJSON(file){if(!file)return;
+    try{if(file.size>120*1024*1024)throw Error('Arquivo muito grande.');const data=validate(JSON.parse(await file.text()));
+      const qty=data.entries.length+' entradas e '+data.exits.length+' saídas';if(!confirm('Este backup tem '+qty+'.\n\nATENÇÃO: substituirá todos os dados deste Mac. Deseja continuar?'))return;
+      db=data;await persist();ui.entryTerm='';ui.entryLotId='all';ui.stockTerm='';ui.stockStore='all';ui.stockModel='all';ui.exitLotId='all';ui.exitSelectedIds.clear();ui.exitSelectTerm='';ui.lotTerm='';ui.lotStatus='all';render();toast('Backup restaurado com sucesso!');
+    }catch(err){toast('Não foi possível importar: '+err.message,true);}finally{el('import-file').value='';}
+  }
+  function rename(type,id){const arr=type==='store'?db.stores:db.models;const item=arr.find(o=>o.id===id);if(!item)return;const value=prompt('Novo nome para '+item.name+':',item.name);if(value===null)return;const name=value.trim();if(name.length<2||name.length>70){toast('Escolha um nome entre 2 e 70 caracteres.',true);return;}if(arr.some(x=>x.id!==id&&x.name.toLowerCase()===name.toLowerCase())){toast('Esse nome já existe.',true);return;}item.name=name;persist();render();toast('Nome atualizado.');}
+  document.addEventListener('click',e=>{
+    const n=e.target.closest('[data-page-nav]');if(n){selectPage(n.dataset.pageNav);return;}
+    const b=e.target.closest('[data-action]');if(!b)return;
+    const a=b.dataset.action;
+    if(a==='register-entry'){clearTimeout(scanTimer);addEntry();}else if(a==='generate-code'){clearTimeout(scanTimer);generateCode();}else if(a==='delete-entry')deleteEntry(b.dataset.id);else if(a==='start-lot')startLot();else if(a==='finish-lot')finishLot();else if(a==='goto-entradas')selectPage('entradas');else if(a==='delete-lot')deleteLot(b.dataset.id);else if(a==='exit-selected')exitSelected();else if(a==='exit-select-visible'){for(const r of exitCandidates().slice(0,400))ui.exitSelectedIds.add(r.id);refreshExitChoices();}else if(a==='exit-clear-selection'){ui.exitSelectedIds.clear();refreshExitChoices();}else if(a==='exit-whole-lot')exitWholeLot();else if(a==='lot-to-exit'){ui.exitLotId=b.dataset.id;ui.exitSelectedIds.clear();ui.exitSelectTerm='';selectPage('saidas');}else if(a==='export-json')exportJSON();else if(a==='import-json')el('import-file').click();else if(a==='csv-entries')exportCSV('entries');else if(a==='csv-exits')exportCSV('exits');else if(a==='csv-stock')exportCSV('stock');else if(a==='rename-store')rename('store',b.dataset.id);else if(a==='rename-model')rename('model',b.dataset.id);
+  });
+  document.addEventListener('change',e=>{
+    if(e.target.id==='entry-store'){db.preferences.storeId=e.target.value;persist();}
+    if(e.target.id==='entry-model'){db.preferences.modelId=e.target.value;persist();}
+    if(e.target.id==='stock-store-filter'){ui.stockStore=e.target.value;renderStock();}
+    if(e.target.id==='stock-model-filter'){ui.stockModel=e.target.value;renderStock();}
+    if(e.target.id==='import-file')importJSON(e.target.files?.[0]);
+    if(e.target.id==='exit-lot'){ui.exitLotId=e.target.value;ui.exitSelectedIds.clear();ui.exitSelectTerm='';renderExits();}
+    if(e.target.id==='lot-status'){ui.lotStatus=e.target.value;renderLots();}
+    if(e.target.id==='entry-lot-filter'){ui.entryLotId=e.target.value;refreshEntriesList();}
+    if(e.target.id==='exit-destination'){db.preferences.destination=e.target.value.trim();persist();}
+    if(e.target.matches('[data-exit-select]')){if(e.target.checked)ui.exitSelectedIds.add(e.target.dataset.exitSelect);else ui.exitSelectedIds.delete(e.target.dataset.exitSelect);updateExitSelectionUI();}
+  });
+  function refreshEntriesList(){const rows=filteredEntries();const results=el('entries-list');if(results)results.innerHTML=entriesTable(rows);const counter=el('entry-result-count');if(counter)counter.textContent=rows.length+' registro(s) encontrado(s) • Clique em Excluir para apagar um único código';}
+  let typingStats={id:null,first:0,last:0,events:0};
+  document.addEventListener('input',e=>{
+    if(e.target.id==='entry-search'){ui.entryTerm=e.target.value;refreshEntriesList();return;}
+    if(e.target.id==='exit-select-search'){ui.exitSelectTerm=e.target.value;refreshExitChoices();return;}
+    if(e.target.id==='lot-search'){ui.lotTerm=e.target.value;el('lots-list').innerHTML=lotsTable(sorted(db.lots).filter(l=>(ui.lotStatus==='all'||(ui.lotStatus==='open')===(l.closedAt==null))&&(!ui.lotTerm.trim()||[l.code,storeName(l.storeId),modelName(l.modelId)].some(v=>v.toLowerCase().includes(ui.lotTerm.trim().toLowerCase())))));return;}
+    if(e.target.id==='stock-search'){ui.stockTerm=e.target.value;const rows=filteredStock();const count=el('stock-list');if(count)count.innerHTML=stockTable(rows);return;}
+    if(!['entry-scan','exit-scan'].includes(e.target.id))return;
+    clearTimeout(scanTimer);
+    const id=e.target.id, now=Date.now();
+    const value=normalizeIMEI(e.target.value);
+    if(id!==typingStats.id||now-typingStats.last>650||!value)typingStats={id,first:now,last:now,events:1};
+    else{typingStats.last=now;typingStats.events++;}
+    if(!value)return;
+    const paste=e.inputType==='insertFromPaste'||e.inputType==='insertFromDrop';
+    const burst=typingStats.events>=5&&value.length>=6&&now-typingStats.first<Math.max(500,value.length*65);
+    // Enter from scanner is immediate. Pasted codes are quick; fast scanners
+    // use a short debounce; manual entry commits after 1.8 seconds idle.
+    const wait=paste?250:burst?420:1800;
+    const snapshot=e.target.value;
+    scanTimer=setTimeout(()=>{
+      const current=el(id);
+      if(current&&current.value===snapshot&&normalizeIMEI(current.value)){
+        if(id==='entry-scan')addEntry();else addExit();
+      }
+    },wait);
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&['entry-scan','exit-scan'].includes(e.target.id)){
+      e.preventDefault();clearTimeout(scanTimer);
+      typingStats={id:null,first:0,last:0,events:0};
+      if(e.target.id==='entry-scan')addEntry();else addExit();
+    }
+  });
+  document.addEventListener('submit',e=>{
+    if(!['add-store-form','add-model-form'].includes(e.target.id))return;e.preventDefault();const type=e.target.id==='add-store-form'?'store':'model';const arr=type==='store'?db.stores:db.models;
+    const input=e.target.querySelector('input');const name=input.value.trim();if(name.length<2){toast('Digite pelo menos 2 caracteres.',true);return;}
+    if(arr.some(s=>s.name.toLowerCase()===name.toLowerCase())){toast('Este cadastro já existe.',true);return;}
+    const id=unique();arr.push({id,name});if(type==='store')db.preferences.storeId=id;else db.preferences.modelId=id;persist();render();toast((type==='store'?'Loja':'Modelo')+' cadastrado(a).');
+  });
+  window.addEventListener('beforeunload',()=>clearTimeout(scanTimer));
+  init();
+})();
+</script>
+</body>
+</html>
